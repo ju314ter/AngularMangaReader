@@ -4,17 +4,10 @@
     <form (ngSubmit)="getManga()">
       <h2 (click)="truc()">Choose a manga</h2>
       <select name="manga" [(ngModel)]="manga" id="mangaSelector" placeholder="Choose">
-          <option selected value="tower-of-god">Tower Of God</option>
-          <option selected value="one-punch-man">One Punch Man</option>
-          <option selected value="gosu-the-master">Gosu the master</option>
       </select>
       <select name="manga" [(ngModel)]="chapter" id="chapterSelector">
 
       </select>
-      <select name="manga" [(ngModel)]="page" id="pageSelector">
-      </select>
-      <input type="checkbox" name="mail" placeholder="John.Doe@gmail.com" [(ngModel)]="onepage">
-      
       <input type="submit" value="connexion">
     </form>
     <div class="view">
