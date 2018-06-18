@@ -41,11 +41,13 @@ export default class ReaderComponent implements OnInit {
             let i: number;
             const imax: number = result.length;
             let s: string;
+            let url: string;
             const reg = new RegExp("href=\\\\\"http\:\/\/www.funmanga.com\/", "g");
             for ( i = 1; i <= imax; i++) {
-                s = "<option value='" + result[i] + "'>" + result[i] + "</option>";
+                url = result[i];
+                s = "<option value='" + url.slice(0, -2) + "'>" + url.slice(0, -2) + "</option>";
                 s = s.replace(reg, "");
-                s = s.slice(0, -2);
+                s = s.slice(0, -4);
                 $('#mangaSelector').append(s);
             }
         });
