@@ -1,0 +1,13 @@
+<main>
+    <div class="login">
+      <form (ngSubmit)="seConnecter()">
+        <h2 (click)="truc()">CONNECT TO YOUR ACCOUNT TO GO ON</h2>
+        <input type="text" name="pseudo" placeholder="Pseudo" [(ngModel)]="pseudonyme">
+        <input type="mail" name="mail" placeholder="John.Doe@gmail.com" [(ngModel)]="mail">
+    
+        <input type="submit" value="Enter">
+      </form>
+      <!-- <p>{{pseudonyme}}</p> Affiche la valeur entrée dans pseudonyme-->
+    </div>
+    <app-article></app-article>
+</main>

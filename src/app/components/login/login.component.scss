@@ -1,0 +1,37 @@
+$couleur:#20b2aa;
+
+main {
+
+    .login {
+        background-color: $couleur;
+        text-align: center;
+        color: white;
+        margin-top: 1em;
+        position: fixed;
+        left: 20vw;
+        top: 15vh;
+        height: 300px;
+        width: 800px;
+        -webkit-box-shadow: 0px 7px 35px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 7px 35px 1px rgba(0,0,0,0.75);
+        box-shadow: 0px 7px 35px 1px rgba(0,0,0,0.75);
+    }
+    
+    .login form {
+        display: inline-block;
+        height: 2em;
+        margin-top: 100px;
+        text-align: right;
+    }
+
+    .login input {
+        margin: 0 auto;
+        text-align: center;
+        display: block;
+        line-height: 2em;
+    }
+
+    input[type="submit"] {
+        display: inline-block;
+    }
+}
