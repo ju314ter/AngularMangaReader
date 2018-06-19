@@ -16,7 +16,7 @@ export default class ReaderComponent implements OnInit {
     listManga = "abcdefghijklmnopqrstuvwxyz";
     constructor(private user: UserService ) {
     }
-    
+
     ngOnInit() {
         this.user.getUserLoggedIn();
         if (this.user.isUserLoggedIn) {
@@ -42,12 +42,11 @@ export default class ReaderComponent implements OnInit {
             const reg = new RegExp("href=\\\\\"http\:\/\/www.funmanga.com\/", "g");
             for ( i = 1; i <= imax; i++) {
                 url = result[i];
-                urlValue= url.replace("_"," ");
-                urlValue= urlValue.replace("-"," ");
+                urlValue = url.replace("_", " ");
+                urlValue = urlValue.replace("-", " ");
                 s = "<option value='" + url.slice(0, -2) + "'>" + urlValue.slice(0, -2) + "</option>";
                 s = s.replace(reg, "");
                 $('#mangaSelector').append(s);
-                
             }
         });
     }
@@ -60,7 +59,7 @@ export default class ReaderComponent implements OnInit {
         + "&callback=?", function(response) {  })
         .then((data) => {
             const filtered = data.match(/https\:\/\/www.funmanga.com\/uploads\/(.*?)jpg/g);
-            if(!filtered){
+            if (!filtered) {
                 $('.viewManga').append("Not available yet");
             }
             return filtered;
@@ -68,7 +67,7 @@ export default class ReaderComponent implements OnInit {
         .then((filtered) => {
             let s = "";
             for (const url of filtered) {
-                s = s + "<img style='width: 60vw;' src=' " + url + " '>";
+                s += "<img style='width: 60vw;' src=' " + url + " '>";
             }
             $('.viewManga').append(s);
             return s;
@@ -93,7 +92,6 @@ export default class ReaderComponent implements OnInit {
                 $('#chapterSelector').append(s);
             }
         })
-        .catch(()=>{console.log("Erreur")});
+        .catch(() => {console.log("Erreur"); });
     }
-
 }
