@@ -2,15 +2,16 @@
   <app-menu></app-menu>
   <div class="login">
     <form (ngSubmit)="getManga()">
-      <h2 (click)="truc()">Choose a manga</h2>
+      <h2>Choose a manga</h2>
       <select name="manga" [(ngModel)]="manga" id="mangaSelector" placeholder="Choose">
+        <!-- <option value="tower-of-god">ToG</option> -->
       </select>
       <select name="manga" [(ngModel)]="chapter" id="chapterSelector">
 
       </select>
       <input type="submit" value="connexion">
     </form>
-    <div class="view">
+    <div class="viewManga">
     </div>
   </div>
 </main>

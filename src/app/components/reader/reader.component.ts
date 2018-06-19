@@ -14,9 +14,9 @@ export default class ReaderComponent implements OnInit {
     onepage: boolean;
     manga: string;
     listManga = "abcdefghijklmnopqrstuvwxyz";
- constructor(private user: UserService ) {
- }
-
+    constructor(private user: UserService ) {
+    }
+    
     ngOnInit() {
         this.user.getUserLoggedIn();
         if (this.user.isUserLoggedIn) {
@@ -24,12 +24,8 @@ export default class ReaderComponent implements OnInit {
         } else {
             console.log("non admin");
         }
-
-        // for (let i = 0; i < this.listManga.length ; i++) {
-
-        // }
         $.get("http://allorigins.me/get?url="
-        + encodeURIComponent("https://www.funmanga.com/manga-list/a")
+        + encodeURIComponent("https://www.funmanga.com/manga-list/t")
         + "&callback=?", function(response) {})
         .then((data) => {
             const listToRetrieve = "href=\\\\\"http\:\/\/www.funmanga.com\/(.*?)\"";
@@ -42,25 +38,31 @@ export default class ReaderComponent implements OnInit {
             const imax: number = result.length;
             let s: string;
             let url: string;
+            let urlValue: string;
             const reg = new RegExp("href=\\\\\"http\:\/\/www.funmanga.com\/", "g");
             for ( i = 1; i <= imax; i++) {
                 url = result[i];
-                s = "<option value='" + url.slice(0, -2) + "'>" + url.slice(0, -2) + "</option>";
+                urlValue= url.replace("_"," ");
+                urlValue= urlValue.replace("-"," ");
+                s = "<option value='" + url.slice(0, -2) + "'>" + urlValue.slice(0, -2) + "</option>";
                 s = s.replace(reg, "");
-                s = s.slice(0, -4);
                 $('#mangaSelector').append(s);
+                
             }
         });
     }
     getManga() {
         $('#chapterSelector').empty();
-        $('.view').empty();
+        $('.viewManga').empty();
         this.chapter = this.chapter.trim();
         $.get("http://allorigins.me/get?url="
         + encodeURIComponent("https://www.readmng.com/" + this.manga + "/" + this.chapter + "/all-pages")
-        + "&callback=?", function(response) { })
+        + "&callback=?", function(response) {  })
         .then((data) => {
             const filtered = data.match(/https\:\/\/www.funmanga.com\/uploads\/(.*?)jpg/g);
+            if(!filtered){
+                $('.viewManga').append("Not available yet");
+            }
             return filtered;
         })
         .then((filtered) => {
@@ -68,7 +70,7 @@ export default class ReaderComponent implements OnInit {
             for (const url of filtered) {
                 s = s + "<img style='width: 60vw;' src=' " + url + " '>";
             }
-            $('.view').append(s);
+            $('.viewManga').append(s);
             return s;
         });
 
@@ -82,6 +84,7 @@ export default class ReaderComponent implements OnInit {
             return filtered;
         })
         .then((filtered) => {
+            console.log(filtered);
             let i: number;
             const imax: number = filtered.length;
             let s: string;
@@ -89,7 +92,8 @@ export default class ReaderComponent implements OnInit {
                 s = "<option value=' " + i + " '>" + i + "</option>";
                 $('#chapterSelector').append(s);
             }
-        });
+        })
+        .catch(()=>{console.log("Erreur")});
     }
 
 }
